@@ -101,6 +101,11 @@ button.delete:hover {
   margin-top: 16px;
 }
 
+#copy-btn {
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
 #count {
   margin: 0;
   font-size: 14px;

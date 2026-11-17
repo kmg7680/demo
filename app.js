@@ -2,6 +2,7 @@ const form = document.getElementById('todo-form');
 const input = document.getElementById('todo-input');
 const list = document.getElementById('todo-list');
 const count = document.getElementById('count');
+const copyBtn = document.getElementById('copy-btn');
 
 let todos = [];
 let nextId = 1;
@@ -48,6 +49,22 @@ function deleteTodo(id) {
   todos = todos.filter((t) => t.id !== id);
   render();
 }
+
+async function copyTodos() {
+  if (todos.length === 0) return;
+  const text = todos.map((t) => `[${t.done ? 'x' : ' '}] ${t.text}`).join('\n');
+  try {
+    await navigator.clipboard.writeText(text);
+    copyBtn.textContent = '복사됨!';
+  } catch {
+    copyBtn.textContent = '복사 실패';
+  }
+  setTimeout(() => {
+    copyBtn.textContent = '목록 복사';
+  }, 1500);
+}
+
+copyBtn.addEventListener('click', copyTodos);
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
